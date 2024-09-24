@@ -31,5 +31,25 @@ router.post('/addMovies',async (req,res)=>{
     }
 })
 
+//put  operation fro updates
+router.put('/edit/:id',async (req,res)=>{
+    try {
+        const id =req.params.id;
+        const data =await movieModel.findByIdAndUpdate(id,req.body);//the req.body contain the thing to be updated
+        res.status(200).send("Update successful"); 
+    } catch (error) {
+        res.status(404).send("Update unsuccessful"); 
+    }
+})
+//delete operation
+router.delete('/remove/:id',async (req,res)=>{
+    try {
+        const id =req.params.id;
+        const data2 =await movieModel.findByIdAndDelete(id);//the req.body contain the thing to be updated
+        res.status(200).send("Delete successful"); 
+    } catch (error) {
+        res.status(404).send("Delete unsuccessful"); 
+    }
+})
 
 module.exports=router;
