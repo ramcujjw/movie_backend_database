@@ -1,6 +1,7 @@
 const express=require ('express');
 const router=express.Router();
-
+router.use(express.json())//mandatory for push operation 1
+router.use(express.urlencoded({extended:true}));//images or files include cheyanamekil mandotory this code
 //requirng the schema file to do crud operation (11:36)
 const movieModel=require('../model/movieData');
 //get operation 11:37
@@ -15,7 +16,20 @@ router.get('/', async (req,res)=>{
  }
 })
 
+//post operation
+router.post('/addMovies',async (req,res)=>{
+    try{
+        var item=req.body;//we are gonna add data 
+        const data1=new movieModel(item);
+    //we have to  save 
+    const saveData= await data1.save();// the data name (for me its data1) .save 
+    res.status(200).send("post successful");
+    }
+    catch(error){
+        res.status(404).send("post unsuccessful");  
 
+    }
+})
 
 
 module.exports=router;
