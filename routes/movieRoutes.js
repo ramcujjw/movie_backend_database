@@ -31,6 +31,8 @@ router.post('/addMovies',async (req,res)=>{
     }
 })
 
+
+
 //put  operation fro updates
 router.put('/edit/:id',async (req,res)=>{
     try {
